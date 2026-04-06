@@ -22,7 +22,7 @@ export function createDeck(): Card[] {
 
   for (const suit of suits) {
     for (const value of values) {
-      deck.push({ suit, value });
+      deck.push({ suit: suit as any, value: value as any });
     }
   }
 
@@ -34,6 +34,5 @@ function shuffle(deck: Card[]): Card[] {
     const j = Math.floor(Math.random() * (i + 1));
     [deck[i], deck[j]] = [deck[j], deck[i]];
   }
-
   return deck;
 }
