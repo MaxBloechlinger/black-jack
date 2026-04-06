@@ -15,24 +15,15 @@ export function startGame(): GameState {
 }
 
 export function playerHit(state: GameState): GameState {
-  if (state.gameOver) return state;
+  const deck = [...state.deck];
+  const card = deck.pop()!;
+  const playerHand = [...state.playerHand, card];
 
-  const card = state.deck.pop()!;
-  const newHand = [...state.playerHand, card];
-
-  if (calculateScore(newHand) > 21) {
-    return {
-      ...state,
-      playerHand: newHand,
-      gameOver: true,
-      result: "lose",
-    };
+  if (calculateScore(playerHand) > 21) {
+    return { ...state, deck, playerHand, gameOver: true, result: "lose" };
   }
 
-  return {
-    ...state,
-    playerHand: newHand,
-  };
+  return { ...state, deck, playerHand };
 }
 
 export function playerStand(state: GameState): GameState {
@@ -56,7 +47,6 @@ export function playerStand(state: GameState): GameState {
     ...state,
     dealerHand,
     deck,
-    playerStand: true,
     gameOver: true,
     result,
   };

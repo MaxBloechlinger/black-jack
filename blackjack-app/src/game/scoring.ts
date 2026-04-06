@@ -7,11 +7,9 @@ export function calculateScore(hand: Card[]) {
   for (const card of hand) {
     if (["J", "Q", "K"].includes(card.value)) total += 10;
     else if (card.value === "A") {
-      aces++;
       total += 11;
-    } else {
-      total += Number(card.value);
-    }
+      aces++;
+    } else total += Number(card.value);
   }
 
   while (total > 21 && aces > 0) {
