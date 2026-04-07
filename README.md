@@ -2,17 +2,6 @@
 
 A small Blackjack web app built with **React + TypeScript**.
 
-## Current Features
-
-- Single player Blackjack against a dealer
-- Standard 52-card deck
-- Shuffle on game start
-- Hit / Stand actions
-- Dealer draws until 17
-- Basic win / lose / push logic
-
-The UI is intentionally simple for now (text cards instead of graphics) so development can focus on the game engine first.
-
 ## Project Structure
 
 The project separates **game logic from UI**, which makes it easier to extend later.
@@ -59,7 +48,7 @@ Then open the local URL shown in the terminal.
 
 ## Planned Improvements
 
-Some things I plan to add next:
+Some things I wanna add next:
 
 - PNG card graphics
 - hide dealer hole card
