@@ -43,15 +43,3 @@ Start the development server:
 ```
 npm run dev
 ```
-
-Then open the local URL shown in the terminal.
-
-## Planned Improvements
-
-Some things I wanna add next:
-
-- PNG card graphics
-- hide dealer hole card
-- basic chip / betting system
-- simple card animations
-- better mobile layout
