@@ -20,3 +20,6 @@ Start the development server:
 ```
 npm run dev
 ```
+
+note:
+add svg files of cards
