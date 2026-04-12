@@ -2,12 +2,7 @@
 
 A small Blackjack web app built with **React + TypeScript**.
 
-## Running the Project
-
-Requirements:
-
-- Node 22 recommended
-- npm
+## How to play
 
 Install dependencies:
 
