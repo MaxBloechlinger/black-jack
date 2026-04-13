@@ -5,18 +5,27 @@ import { calculateScore } from "./game/scoring";
 
 function App() {
   const [game, setGame] = useState(startGame());
+
   const playerScore = calculateScore(game.playerHand);
   const dealerScore = calculateScore(game.dealerHand);
+  const visibleDealerScore = calculateScore([game.dealerHand[0]]);
+
   return (
     <div className="table">
-      <h2>Dealer (Score: {game.gameOver ? dealerScore : "?"})</h2>
+      <h1>Chips: {game.chips}</h1>
+
+      <h2>
+        Dealer (Score: {game.gameOver ? dealerScore : visibleDealerScore})
+      </h2>
+
       <div className="hand">
         {game.dealerHand.map((c, i) => (
-          <Card key={i} card={c} />
+          <Card key={i} card={c} hidden={i === 1 && !game.gameOver} />
         ))}
       </div>
 
       <h2>Player (Score: {playerScore})</h2>
+
       <div className="hand">
         {game.playerHand.map((c, i) => (
           <Card key={i} card={c} />
@@ -33,7 +42,10 @@ function App() {
       {game.gameOver && (
         <div className="result">
           <h3>{game.result}</h3>
-          <button onClick={() => setGame(startGame())}>New Game</button>
+
+          <button onClick={() => setGame(startGame(game.chips))}>
+            New Game
+          </button>
         </div>
       )}
     </div>

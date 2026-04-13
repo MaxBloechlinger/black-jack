@@ -27,4 +27,5 @@ export interface GameState {
   playerStand: boolean;
   gameOver: boolean;
   result?: "win" | "lose" | "push";
+  chips: number;
 }

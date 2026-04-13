@@ -1,8 +1,10 @@
-import { GameState } from "./types";
+import type { GameState } from "./types";
 import { createDeck } from "./deck";
 import { calculateScore } from "./scoring";
 
-export function startGame(): GameState {
+const BET = 10;
+
+export function startGame(prevChips?: number): GameState {
   const deck = createDeck();
 
   return {
@@ -11,6 +13,7 @@ export function startGame(): GameState {
     dealerHand: [deck.pop()!, deck.pop()!],
     playerStand: false,
     gameOver: false,
+    chips: prevChips ?? 100,
   };
 }
 
@@ -20,7 +23,14 @@ export function playerHit(state: GameState): GameState {
   const playerHand = [...state.playerHand, card];
 
   if (calculateScore(playerHand) > 21) {
-    return { ...state, deck, playerHand, gameOver: true, result: "lose" };
+    return {
+      ...state,
+      deck,
+      playerHand,
+      gameOver: true,
+      result: "lose",
+      chips: state.chips - BET,
+    };
   }
 
   return { ...state, deck, playerHand };
@@ -38,10 +48,17 @@ export function playerStand(state: GameState): GameState {
   const dealerScore = calculateScore(dealerHand);
 
   let result: "win" | "lose" | "push";
+  let chips = state.chips;
 
-  if (dealerScore > 21 || playerScore > dealerScore) result = "win";
-  else if (dealerScore > playerScore) result = "lose";
-  else result = "push";
+  if (dealerScore > 21 || playerScore > dealerScore) {
+    result = "win";
+    chips += BET;
+  } else if (dealerScore > playerScore) {
+    result = "lose";
+    chips -= BET;
+  } else {
+    result = "push";
+  }
 
   return {
     ...state,
@@ -49,5 +66,6 @@ export function playerStand(state: GameState): GameState {
     deck,
     gameOver: true,
     result,
+    chips,
   };
 }
