@@ -28,4 +28,5 @@ export interface GameState {
   gameOver: boolean;
   result?: "win" | "lose" | "push";
   chips: number;
+  doubleDown: boolean;
 }

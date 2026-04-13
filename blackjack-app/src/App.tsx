@@ -2,6 +2,7 @@ import { useState } from "react";
 import { startGame, playerHit, playerStand } from "./game/blackjackEngine";
 import Card from "./components/Card";
 import { calculateScore } from "./game/scoring";
+import { playerDoubleDown } from "./game/blackjackEngine";
 
 function App() {
   const [game, setGame] = useState(startGame());
@@ -36,6 +37,12 @@ function App() {
         <div className="controls">
           <button onClick={() => setGame(playerHit(game))}>Hit</button>
           <button onClick={() => setGame(playerStand(game))}>Stand</button>
+
+          {game.playerHand.length === 2 && (
+            <button onClick={() => setGame(playerDoubleDown(game))}>
+              Double
+            </button>
+          )}
         </div>
       )}
 
