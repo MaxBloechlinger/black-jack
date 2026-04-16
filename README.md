@@ -19,3 +19,4 @@ npm run dev
 note:
 add svg files of cards
 add card animations
+add adjustable chips bet amount
